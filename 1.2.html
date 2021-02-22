@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<input type="text" value="" placeholder="заметка" id="input">
+<button class="btn btn-success">Добавить</button>
+<div id="app"></div>
+
+
+<script>
+    /*
+     Добавить элемент добавления заметок
+     Алгоритм:
+
+    1. Добавить текстовое поле input, добавить вручную
+    2. Добавить кнопку (текст добавить) добавить вручную
+    3. По клику на кнопку, происходит добавление заметки в массив и вывод всех заметок на экран
+    4. Данные заметки вводятся в input
+    5. Созданные заметки, имеют по умолчанию done = false
+
+    */
+
+    const notes = [
+        {
+            id: 1,
+            text: 'Купить продукты',
+            done: false
+        },
+        {
+            id: 2,
+            text: 'Зарядить телефон',
+            done: false
+        }
+    ]
+
+
+    let app = document.getElementById('app')
+    let btn = document.getElementsByTagName('button')[0]
+
+    function render() {
+        app.innerHTML = ''
+        let ul = document.createElement('ul')
+        app.appendChild(ul)
+
+        notes.forEach((item) => {
+            let li = document.createElement('li')
+            ul.appendChild(li)
+            li.innerText = item.text
+        })
+    }
+
+
+    btn.addEventListener('click', () => {
+        let input = document.getElementById('input')
+        if (input.value) {
+            notes.push({
+                id: Math.floor(Math.random() * 10),
+                text: input.value,
+                done: false
+            })
+        }
+        render()
+      })
+    render()
+
+</script>
+</body>
+</html>
